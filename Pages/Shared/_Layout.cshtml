@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Colitas Felices</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+</head>
+<body>
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item has-text-weight-bold" href="/">🐾 Colitas Felices</a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="mainMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="/#inicio">Inicio</a>
+                    <a class="navbar-item" href="/#historia">Historia</a>
+                    <a class="navbar-item" href="/#galeria">Galería</a>
+                    <div class="navbar-item">
+                        <a class="button is-primary" href="/#donativos">Donar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main style="padding-top: 3.25rem;">
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>© @DateTime.Now.Year Fundación Colitas Felices</p>
+        </div>
+    </footer>
+
+    <script>
+            document.querySelectorAll('.navbar-burger').forEach(b => {
+                b.addEventListener('click', () => {
+                    const t = document.getElementById(b.dataset.target);
+                    b.classList.toggle('is-active');
+                    t.classList.toggle('is-active');
+                });
+            });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

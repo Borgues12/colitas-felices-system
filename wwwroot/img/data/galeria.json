@@ -1,0 +1,23 @@
+[
+  {
+    "id": "perritos",
+    "titulo": "Perritos",
+    "frase": "Cada uno llegó con una historia difícil y hoy recibe cuidado, comida y cariño.",
+    "alt": "Perro rescatado por la fundación Colitas Felices",
+    "fotos": [ "perros1", "perros2", "foto1", "foto2", "foto3", "foto4", "foto5", "foto6", "foto7", "foto8", "foto9", "foto10", "foto11", "foto13", "foto14" ]
+  },
+  {
+    "id": "gatos",
+    "titulo": "Gatitos",
+    "frase": "Pequeños sobrevivientes que aprenden a confiar y a ronronear de nuevo.",
+    "alt": "Gato rescatado por la fundación Colitas Felices",
+    "fotos": [ "gato1", "gato2", "gato3" ]
+  },
+  {
+    "id": "granja",
+    "titulo": "Nuestra granja",
+    "frase": "Un espacio de paz donde también viven animales que encontraron un segundo hogar.",
+    "alt": "Animal de la granja de la fundación Colitas Felices",
+    "fotos": [ "granja1", "granja2", "granja3", "granja4", "granja5" ]
+  }
+]

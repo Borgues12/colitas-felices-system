@@ -1,10 +1,468 @@
-﻿@page
+@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+	ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section id="inicio" class="cf-cover">
+	<img class="cf-cover-img" src="~/img/inicio/adopta.jpg" alt="Perro y gato rescatados juntos" fetchpriority="high" />
+
+	<div class="cf-cover-content">
+		<div class="container has-text-centered">
+			<p class="font-accent is-size-3">Bienvenidos a</p>
+			<h1 class="title is-1 is-size-2-mobile">UN HOGAR PARA CADA COLITA</h1>
+			<p class="subtitle is-4">Cuidamos, protegemos y acompañamos a perros y gatos que esperan una familia.</p>
+			<a class="button is-primary is-medium" href="#ayudar">QUIERO AYUDAR</a>
+		</div>
+	</div>
+
+	<p class="cf-cover-brand" aria-hidden="true">Colitas Felices</p>
+</section>
+
+<section id="cifras" class="cf-stats">
+	<div class="container">
+		<div class="columns is-mobile is-multiline has-text-centered">
+
+			<div class="column is-4-tablet is-12-mobile" data-aos="fade-up" data-aos-delay="0">
+				<div class="cf-stat">
+					<p class="cf-stat-number">
+						<span class="cf-counter" data-target="200" data-prefix="+">+200</span>
+					</p>
+					<p class="cf-stat-label">Animales rescatados</p>
+				</div>
+			</div>
+
+			<div class="column is-4-tablet is-12-mobile" data-aos="fade-up" data-aos-delay="100">
+				<div class="cf-stat">
+					<p class="cf-stat-number">
+						<span class="cf-counter" data-target="80" data-prefix="+">+80</span>
+					</p>
+					<p class="cf-stat-label">Adopciones responsables</p>
+				</div>
+			</div>
+
+			<div class="column is-4-tablet is-12-mobile" data-aos="fade-up" data-aos-delay="200">
+				<div class="cf-stat">
+					<p class="cf-stat-number">
+						<span class="cf-counter" data-target="8" data-prefix="+">+8</span>
+					</p>
+					<p class="cf-stat-label">Años de compromiso</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<!-- MISIÓN Y VISIÓN -->
+<section id="nosotros" class="section bg-soft-pink">
+    <div class="container">
+        <div class="columns is-vcentered is-variable is-8">
+            <div class="column is-6">
+                <figure class="image is-4by3">
+					<img class="cf-img" src="~/img/inicio/compromiso.jpg" alt="Perros y gatos rescatados en el refugio" loading="lazy" />
+                </figure>
+            </div>
+            <div class="column is-6">
+                <h2 class="title is-2 cf-title-xl">
+                    Nuestro <mark class="cf-highlight"><span class="font-accent cf-script">compromiso</span></mark><br />
+                    es darles una segunda oportunidad.
+                </h2>
+                <p class="is-size-5 mb-5">Detrás de cada colita hay una historia de abandono y una esperanza. Esto es lo que nos mueve cada día.</p>
+
+                <div class="cf-accordion">
+                    <details name="mv" open>
+                        <summary>Misión</summary>
+                        <p>Rescatar y rehabilitar animales en situación de abandono, brindándoles atención veterinaria, cariño y la oportunidad de encontrar una familia responsable.</p>
+                    </details>
+                    <details name="mv">
+                        <summary>Visión</summary>
+                        <p>Ser un referente de protección animal en nuestra comunidad, promoviendo la adopción responsable y una sociedad que respete a todos los seres vivos.</p>
+                    </details>
+                    <details name="mv">
+                        <summary>Nuestros valores</summary>
+                        <p>Empatía, responsabilidad, transparencia en el uso de los donativos y respeto por la vida animal.</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="galeria" class="section bg-surface">
+	<div class="container">
+
+		@for (var c = 0; c < Model.Categorias.Count; c++)
+		{
+			var cat = Model.Categorias[c];
+			<div class="cf-gallery-block @(c % 2 == 1 ? "is-reverse" : "")" id="galeria-@cat.Id">
+				<div class="cf-gallery-head">
+					<h3 class="cf-gallery-title">@cat.Titulo</h3>
+					<span class="cf-gallery-line" aria-hidden="true"></span>
+					<p class="cf-gallery-phrase">@cat.Frase</p>
+				</div>
+				<div class="cf-bento @(cat.Fotos.Count < 4 ? "is-3" : "")"
+					 data-bento
+					 data-fotos="@string.Join(",", cat.Fotos)"
+					 data-ruta="@Url.Content("~/img/inicio/galeria/")">
+					@for (var s = 0; s < Math.Min(4, cat.Fotos.Count); s++)
+					{
+						<div class="cf-bento-tile cf-bento-@(s + 1)">
+							<img src="~/img/inicio/galeria/@(cat.Fotos[s]).webp" alt="@cat.Alt" width="800" height="600" loading="lazy" />
+						</div>
+					}
+				</div>
+			</div>
+		}
+	</div>
+</section>
+
+<!-- CÓMO AYUDAR -->
+<section id="ayudar" class="section bg-gray-light">
+	<div class="container">
+		<div class="has-text-centered mb-6">
+			<p class="font-accent is-size-4">Tú también puedes sumarte</p>
+			<h2 class="title is-2">CÓMO AYUDAR</h2>
+		</div>
+		<div class="cf-track" id="cf-track">
+			<div class="cf-slide">
+				<article class="card-cf cf-media-card h-100">
+					<img src="~/img/inicio/money-transfer.png" alt="Perro recibiendo alimento" loading="lazy" />
+					<div class="p-5 has-text-centered">
+						<h3 class="title is-4">DONAR INSUMOS</h3>
+						<p class="mb-4">Alimento, mantas y medicinas cubren las necesidades del día a día de nuestros animales.</p>
+						<a class="button is-primary" target="_blank" rel="noopener"
+						   href="https://wa.me/593983750246?text=Hola%2C%20quiero%20donar%20insumos%20para%20los%20animalitos.">DONAR INSUMOS</a>
+					</div>
+				</article>
+			</div>
+			<div class="cf-slide">
+				<article class="card-cf cf-media-card h-100">
+					<img src="~/img/inicio/volunteer.png" alt="Voluntaria cuidando a un perro" loading="lazy" />
+					<div class="p-5 has-text-centered">
+						<h3 class="title is-4">VOLUNTARIO</h3>
+						<p class="mb-4">Dedica unas horas a pasear, cuidar y acompañar a nuestros rescatados.</p>
+						<a class="button is-primary is-outlined" target="_blank" rel="noopener"
+						   href="https://wa.me/593983750246?text=Hola%2C%20quiero%20ser%20voluntario.">QUIERO AYUDAR</a>
+					</div>
+				</article>
+			</div>
+			<div class="cf-slide">
+				<article class="card-cf cf-media-card h-100">
+					<img src="~/img/inicio/dog-adopt.png" alt="Familia adoptando un gato" loading="lazy" />
+					<div class="p-5 has-text-centered">
+						<h3 class="title is-4">ADOPTAR</h3>
+						<p class="mb-4">Abre las puertas de tu hogar a un compañero que espera una segunda oportunidad.</p>
+						<a class="button is-primary is-outlined" target="_blank" rel="noopener"
+						   href="https://wa.me/593983750246?text=Hola%2C%20quiero%20adoptar">QUIERO ADOPTAR</a>
+					</div>
+				</article>
+			</div>
+			<div class="cf-slide">
+				<article class="card-cf cf-media-card h-100">
+					<img src="~/img/inicio/share.png" alt="Voluntarios compartiendo" loading="lazy" />
+					<div class="p-5 has-text-centered">
+						<h3 class="title is-4">COMPARTIR</h3>
+						<p class="mb-4">Síguenos y difunde nuestras historias para que más personas conozcan a quienes buscan hogar.</p>
+						<div class="cf-share">
+							<a href="https://www.facebook.com/colitasfelicesecuador" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Colitas Felices"><i class="bi bi-facebook"></i></a>
+							<a href="https://www.instagram.com/colitasfelicesecuador" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Colitas Felices"><i class="bi bi-instagram"></i></a>
+							<a href="https://www.tiktok.com/@@colitasfelicesdiana" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Colitas Felices"><i class="bi bi-tiktok"></i></a>
+						</div>
+					</div>
+				</article>
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<script>
+	(function () {
+		var track = document.getElementById('cf-track');
+		if (!track) return;
+
+		var SPEED = 60; // pixeles por segundo
+		var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		// Rail interno con las tarjetas originales y una copia para el loop
+		var rail = document.createElement('div');
+		rail.className = 'cf-rail';
+		var slides = Array.prototype.slice.call(track.children);
+		slides.forEach(function (s) { rail.appendChild(s); });
+		slides.forEach(function (s) {
+			var c = s.cloneNode(true);
+			c.setAttribute('aria-hidden', 'true');
+			c.querySelectorAll('a, button').forEach(function (e) { e.tabIndex = -1; });
+			rail.appendChild(c);
+		});
+		track.appendChild(rail);
+
+		var offset = 0, paused = false, last = null, loopW = 0;
+
+		function measure() {
+			var gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
+			loopW = (slides[0].offsetWidth + gap) * slides.length;
+		}
+
+		function frame(t) {
+			if (last === null) last = t;
+			var dt = (t - last) / 1000;
+			last = t;
+
+			if (!paused && !reduce) offset += SPEED * dt;
+			if (offset >= loopW) offset -= loopW;
+
+			rail.style.transform = 'translate3d(' + (-offset) + 'px,0,0)';
+			requestAnimationFrame(frame);
+		}
+
+		var box = track.parentElement;
+		box.addEventListener('mouseenter', function () { paused = true; });
+		box.addEventListener('mouseleave', function () { paused = false; });
+		box.addEventListener('touchstart', function () { paused = true; }, { passive: true });
+		box.addEventListener('touchend', function () { paused = false; }, { passive: true });
+		box.addEventListener('focusin', function () { paused = true; });
+		box.addEventListener('focusout', function () { paused = false; });
+
+		window.addEventListener('resize', measure);
+		measure();
+		requestAnimationFrame(frame);
+	})();
+</script>
+
+<section id="historia" class="section bg-peach">
+	<div class="container">
+
+		<div class="columns is-centered mb-6">
+			<div class="column is-10-tablet is-8-desktop has-text-centered">
+				<h2 class="title is-2 cf-title-xl">
+					Todo empezó con una <mark class="cf-highlight"><span class="font-accent cf-script">colita</span></mark>.
+					Esta es nuestra historia, contada por quienes la empezaron.
+				</h2>
+			</div>
+		</div>
+
+		<!-- Fundadora (tarjeta destacada) -->
+		<article class="cf-team-card cf-team-featured mb-5" data-aos="fade-up">
+			<figure class="cf-team-photo">
+				<img src="~/img/inicio/equipo/diana.webp" alt="Diana Candonga, fundadora" loading="lazy" />
+				<span class="cf-team-role">Fundadora</span>
+			</figure>
+			<div class="cf-team-body">
+				<h3 class="cf-team-name">Diana Candonga</h3>
+				<p class="cf-team-subtitle">Fundación Colitas Felices &amp; Rescate de Angelitos</p>
+				<p class="cf-team-bio">
+					Diana es una rescatista que convirtió su amor por los animales en una misión de vida.
+					Desde 2015 dedica sus esfuerzos al rescate, la recuperación y la protección de animales
+					en situación de abandono y maltrato.
+				</p>
+				<p class="cf-team-bio">
+					A través de la fundación trabaja incansablemente para brindarles una segunda oportunidad,
+					un hogar digno y la posibilidad de conocer el amor. Su mayor sueño es construir un mundo
+					más compasivo, donde ningún animal sea olvidado y cada vida sea tratada con respeto y dignidad.
+				</p>
+				<blockquote class="cf-team-quote">
+					Rescatar una vida es devolverle la oportunidad de ser feliz.
+				</blockquote>
+			</div>
+		</article>
+
+		<!-- Equipo -->
+		<div class="columns is-multiline is-variable is-5">
+
+			<div class="column is-6-desktop" data-aos="fade-up" data-aos-delay="0">
+				<article class="cf-team-card h-100">
+					<figure class="cf-team-photo">
+						<img src="~/img/inicio/equipo/wilmer.webp" alt="Wilmer Sifontes, rescatista" loading="lazy" />
+						<span class="cf-team-role">Rescatista</span>
+					</figure>
+					<div class="cf-team-body">
+						<h3 class="cf-team-name">Wilmer Sifontes</h3>
+						<p class="cf-team-bio">
+							Parte de la familia desde 2021. Con su fuerza y dedicación fue fundamental para levantar
+							el refugio. Cada día cuida, cura y supervisa a nuestros perritos, y acude al llamado de
+							emergencia cuando un animal necesita ayuda, incluso cruzando fronteras.
+						</p>
+						<p class="cf-team-bio">
+							Rescatar no es solo salvar vidas, es estar presentes cuando más nos necesitan.
+						</p>
+					</div>
+				</article>
+			</div>
+
+			<div class="column is-6-desktop" data-aos="fade-up" data-aos-delay="100">
+				<article class="cf-team-card h-100">
+					<figure class="cf-team-photo">
+						<img src="~/img/inicio/equipo/yordy.webp" alt="Yordy López, cuidador" loading="lazy" />
+						<span class="cf-team-role">Cuidador</span>
+					</figure>
+					<div class="cf-team-body">
+						<h3 class="cf-team-name">Yordy López</h3>
+						<p class="cf-team-bio">
+							Comparte su día y su noche con nuestros perritos, permaneciendo junto a ellos las 24 horas.
+							Se encarga de alimentarlos, limpiar sus espacios y estar atento a su bienestar para que
+							vivan seguros, limpios y rodeados de cuidados.
+						</p>
+					</div>
+				</article>
+			</div>
+
+			<div class="column is-6-desktop" data-aos="fade-up" data-aos-delay="0">
+				<article class="cf-team-card h-100">
+					<figure class="cf-team-photo">
+						<img src="~/img/inicio/equipo/cristian.webp" alt="Cristian Cueva, cuidador" loading="lazy" />
+						<span class="cf-team-role">Cuidador</span>
+					</figure>
+					<div class="cf-team-body">
+						<h3 class="cf-team-name">Cristian Cueva</h3>
+						<p class="cf-team-bio">
+							Minucioso, paciente y responsable. Mantiene los espacios limpios, les da su alimentación
+							adecuada y está pendiente de cada uno. Trabaja con respeto, sin gritos ni maltratos,
+							brindándoles tranquilidad y seguridad.
+						</p>
+					</div>
+				</article>
+			</div>
+
+			<div class="column is-6-desktop" data-aos="fade-up" data-aos-delay="100">
+				<article class="cf-team-card h-100">
+					<figure class="cf-team-photo">
+						<img src="~/img/inicio/equipo/juan-carlos.webp" alt="Juan Carlos Mendoza, nuevo integrante" loading="lazy" />
+						<span class="cf-team-role">Nuevo integrante</span>
+					</figure>
+					<div class="cf-team-body">
+						<h3 class="cf-team-name">Juan Carlos Mendoza</h3>
+						<p class="cf-team-bio">
+							Se incorporó recientemente al equipo. Motivado por su cariño hacia los animales,
+							aprende cada día con entusiasmo y compromiso, siempre dispuesto a trabajar en equipo.
+							Su camino en el refugio apenas comienza.
+						</p>
+					</div>
+				</article>
+			</div>
+
+		</div>
+
+	
+	</div>
+</section>
+
+
+<!-- UBICACIÓN -->
+<section id="ubicacion" class="section bg-surface">
+	<div class="container">
+		<div class="has-text-centered mb-6">
+			<p class="font-accent is-size-4">Visítanos</p>
+			<h2 class="title is-2">CÓMO LLEGAR</h2>
+		</div>
+
+		<div class="columns is-variable is-6 is-vcentered">
+			<!-- Columna de información -->
+			<div class="column is-5">
+				<article class="card-cf p-5 h-100 is-flex is-flex-direction-column is-justify-content-space-between" style="border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); background: #ffffff;">
+					<div>
+						<h3 class="title is-4 mb-4 has-text-primary-dark">Nuestro Refugio</h3>
+
+						<!-- Dirección -->
+						<div class="mb-4">
+							<p class="is-size-7 has-text-weight-bold is-uppercase has-text-grey mb-1">Dirección</p>
+							<p class="is-size-6">
+								<strong>Calderón, Quito</strong>
+								<span class="tag is-light is-rounded ml-1">Plus Code: VHWC+MXH</span>
+							</p>
+						</div>
+
+						<hr style="margin: 0.75rem 0; opacity: 0.5;">
+
+						<!-- Horario de visitas -->
+						<div class="mb-4">
+							<p class="is-size-7 has-text-weight-bold is-uppercase has-text-grey mb-2">Horario de Visitas</p>
+							<ul class="is-size-6">
+								<li class="is-flex is-justify-content-space-between is-align-items-center mb-2">
+									<span class="has-text-grey-dark">Lunes</span>
+									<span class="tag is-danger is-light">Cerrado</span>
+								</li>
+								<li class="is-flex is-justify-content-space-between is-align-items-center mb-2">
+									<span class="has-text-grey-dark">Martes a Viernes</span>
+									<span class="tag is-info is-light">11h00 a 13h00</span>
+								</li>
+								<li class="is-flex is-justify-content-space-between is-align-items-start">
+									<span class="has-text-grey-dark">Sábados y Domingos</span>
+									<div class="has-text-right">
+										<span class="tag is-primary is-light mb-1">11h00 a 13h00</span><br>
+										<span class="tag is-primary is-light">15h00 a 17h00</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+
+						<hr style="margin: 0.75rem 0; opacity: 0.5;">
+
+						<!-- Contacto -->
+						<div>
+							<p class="is-size-7 has-text-weight-bold is-uppercase has-text-grey mb-1">Contacto & Citas</p>
+							<p class="is-size-6 has-text-grey-dark">
+								Para una mejor atención en tu visita o consultas sobre adopciones, contáctanos previamente.
+							</p>
+						</div>
+					</div>
+				</article>
+			</div>
+
+			<!-- Columna del mapa -->
+			<div class="column is-7">
+				<div class="cf-map" style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.08); height: 100%; min-height: 380px;">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3989.811772182781!2d-78.4271389!3d-0.1038056!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d58f0045e99793%3A0xd6786ef942652134!2s!5e0!3m2!1ses-419!2sec!4v1792209412869!5m2!1ses-419!2sec"
+							title="Ubicación de Colitas Felices en Google Maps"
+							style="width: 100%; height: 100%; min-height: 380px; border: 0;"
+							loading="lazy"
+							referrerpolicy="no-referrer-when-downgrade"
+							allowfullscreen>
+					</iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- WhatsApp flotante -->
+<a class="cf-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp"
+   href="https://wa.me/593XXXXXXXXX?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n">
+	<i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- Burbuja de ayuda -->
+<aside class="cf-bubble" data-bubble aria-label="Ayuda a Colitas Felices">
+	<button type="button" class="delete" aria-label="Cerrar" data-bubble-close></button>
+	<div class="cf-bubble-head">
+		<img src="~/img/logo/logo_mini.svg" alt="Logo Colitas Felices" class="mr-2" style="max-height: 3rem;" />
+		<strong>Colitas Felices</strong>
+	</div>
+	<div class="cf-typing" data-typing aria-hidden="true"><span></span><span></span><span></span></div>
+	<p class="cf-bubble-text">Gracias por llegar hasta aquí. Puedes adoptar, ser voluntario o donar insumos. Cualquier ayuda cambia la vida de una colita.</p>
+	<div class="cf-bubble-actions">
+		<a class="button is-primary is-small" href="/#ayudar">Cómo ayudar</a>
+		<a class="button is-primary is-outlined is-small" target="_blank" rel="noopener"
+		   href="https://wa.me/593983750246?text=Hola%2C%20quiero%20ayudar%20a%20Colitas%20Felices.">Escribir por WhatsApp</a>
+	</div>
+</aside>
+
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+	AOS.init({
+		duration: 700,
+		once: true,
+		offset: 80,
+		disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+	});
+</script>
+
+@section Scripts {
+	<script src="~/js/gallery.js" defer></script>
+	<script src="~/js/cta.js" defer></script>
+	<script src="~/js/accordion.js" defer></script>
+	<script src="~/js/counters.js" asp-append-version="true"></script>
+}

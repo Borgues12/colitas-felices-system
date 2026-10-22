@@ -490,3 +490,4 @@ $RECYCLE.BIN/
 appsettings.Development.json
 secrets.json
 .env
+_referencia/
